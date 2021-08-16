@@ -18,6 +18,7 @@ def get_data(config_path):
     df = df.replace('SlowD', 1)
     df = df.replace('SuddenR', 1)
     df = df.replace('SuddenD', 1)
+
     print(df)
 
     return df

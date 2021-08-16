@@ -1,0 +1,74 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python C:\dvc_tutorial\saved_models\src\load_data.py --config=params.yaml
+    deps:
+    - path: data_given\data_file_lab.csv
+      md5: ca06639c9b93aa1f18356cc57c092d4e
+      size: 18191127
+    - path: saved_models\src\get_data.py
+      md5: 6180f2c175b0f19983a9586622c27df1
+      size: 791
+    - path: saved_models\src\load_data.py
+      md5: 5002ba2233af5a674fcda820e2673830
+      size: 519
+    outs:
+    - path: data\raw\data_file_lab.csv
+      md5: ca06639c9b93aa1f18356cc57c092d4e
+      size: 18191127
+  split_data:
+    cmd: python C:\dvc_tutorial\saved_models\src\split_data.py --config=params.yaml
+    deps:
+    - path: data\raw\data_file_lab.csv
+      md5: ca06639c9b93aa1f18356cc57c092d4e
+      size: 18191127
+    - path: saved_models\src\split_data.py
+      md5: 3b7e2cd5cc4f3a98fefba67d61560e86
+      size: 1490
+    outs:
+    - path: data\processed\x_test.csv
+      md5: 4116be92f1ab73dc47dda87ab55b2b24
+      size: 6295464
+    - path: data\processed\x_train.csv
+      md5: 16c9a4625cdb66f3c452126ca99d1cd0
+      size: 11878927
+    - path: data\processed\y_test.csv
+      md5: 9aa7df445870177fe08ae03881dd08ae
+      size: 8787
+    - path: data\processed\y_train.csv
+      md5: 11f7f59943cc839e6bd813f073b70b2c
+      size: 16317
+  train_and_evaluate:
+    cmd: python  C:\dvc_tutorial\saved_models\src\train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data\processed\x_test.csv
+      md5: 4116be92f1ab73dc47dda87ab55b2b24
+      size: 6295464
+    - path: data\processed\x_train.csv
+      md5: 16c9a4625cdb66f3c452126ca99d1cd0
+      size: 11878927
+    - path: data\processed\y_test.csv
+      md5: 9aa7df445870177fe08ae03881dd08ae
+      size: 8787
+    - path: data\processed\y_train.csv
+      md5: 11f7f59943cc839e6bd813f073b70b2c
+      size: 16317
+    - path: saved_models\src\train_and_evaluate.py
+      md5: b8bb2f1de8e521118b04be86c410365d
+      size: 4546
+    outs:
+    - path: cm.csv
+      md5: 893011a1c2cf2df2f540d114b404db17
+      size: 27208
+    - path: report/prc.json
+      md5: 4a44031060d249ff2b170376de311787
+      size: 275
+    - path: report/roc.json
+      md5: 0842023c3f3642595a28b2c94d6999bf
+      size: 342
+    - path: report/scores.json
+      md5: 4ee0d3965e05b7e98f10b7d6f38e6ef5
+      size: 162
+    - path: saved_models\model.joblib
+      md5: bfb4bde756ecedd27959666b9794539c
+      size: 3183

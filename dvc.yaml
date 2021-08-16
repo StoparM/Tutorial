@@ -1,0 +1,51 @@
+stages:
+  load_data:
+    cmd: python C:\dvc_tutorial\saved_models\src\load_data.py --config=params.yaml
+    deps:
+    - C:\dvc_tutorial\saved_models\src\get_data.py
+    - C:\dvc_tutorial\saved_models\src\load_data.py
+    - C:\dvc_tutorial\data_given\data_file_lab.csv
+    outs:
+    - C:\dvc_tutorial\data\raw\data_file_lab.csv
+
+  split_data:
+    cmd: python C:\dvc_tutorial\saved_models\src\split_data.py --config=params.yaml
+    deps:
+    - C:\dvc_tutorial\saved_models\src\split_data.py
+    - C:\dvc_tutorial\data\raw\data_file_lab.csv
+    outs:
+    - C:\dvc_tutorial\data\processed\x_train.csv
+    - C:\dvc_tutorial\data\processed\y_train.csv
+    - C:\dvc_tutorial\data\processed\x_test.csv 
+    - C:\dvc_tutorial\data\processed\y_test.csv
+#, dvc plots show
+  train_and_evaluate:
+    cmd: python  C:\dvc_tutorial\saved_models\src\train_and_evaluate.py --config=params.yaml 
+    
+    deps:
+    - C:\dvc_tutorial\data\processed\x_train.csv
+    - C:\dvc_tutorial\data\processed\y_train.csv
+    - C:\dvc_tutorial\data\processed\x_test.csv 
+    - C:\dvc_tutorial\data\processed\y_test.csv
+    - C:\dvc_tutorial\saved_models\src\train_and_evaluate.py
+    
+    metrics:
+    - report/scores.json:
+        cache: false
+
+    plots:
+      
+    - report/prc.json:
+        cache: false
+        x: recall
+        y: precision
+    - report/roc.json:
+        cache: false
+        x: fpr
+        y: tpr
+    - cm.csv:
+        cache: false
+        
+
+    outs:
+    - C:\dvc_tutorial\saved_models\model.joblib

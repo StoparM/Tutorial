@@ -36,11 +36,11 @@ def train_and_evaluate(config_path):
     y_train = pd.read_csv(y_train_data_path, header=None)
     y_test = pd.read_csv(y_train_data_path, header=None)
 
-    # from sklearn.ensemble import RandomForestClassifier
-    # model = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 0).fit(x_train, y_train)
-
+    y_train = y_train.to_numpy()
+    y_test = y_test.to_numpy()
+    
     from sklearn.linear_model import LogisticRegression
-    model = LogisticRegression(solver='sag', random_state=0).fit(x_train, y_train)
+    model = LogisticRegression(solver='sag', random_state=0).fit(x_train, y_train.ravel())
 
     train_score = model.score(x_train, y_train) * 100
     print(train_score)

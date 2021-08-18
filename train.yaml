@@ -11,5 +11,5 @@ jobs:
               REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           run: |
               dvc repro
-              dvc metrics show
+              dvc metrics diff --show-md master > scores.json
               

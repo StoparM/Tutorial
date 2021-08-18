@@ -71,7 +71,7 @@ def train_and_evaluate(config_path):
                     for p, r, t in prc_points
                 ]
             }
-        json.dump(prcs, fd, indent=4, cls=NumpyEncoder)
+        json.dump(prcs, fd, indent=3, cls=NumpyEncoder)
         
 
     with open(roc_file, "w") as fd:
@@ -86,18 +86,18 @@ def train_and_evaluate(config_path):
 
     print(classification_report(y_test, predicted_val))
 
-    cm = confusion_matrix(y_test, predicted_val)
-    print(cm)
+    # cm = confusion_matrix(y_test, predicted_val)
+    # print(cm)
 
         
-    df1 = pd.DataFrame(predicted_val, columns = ['Predicted'])
-    df_cm = pd.concat([y_test, df1], axis=1)
-    print(df_cm)
+    # df1 = pd.DataFrame(predicted_val, columns = ['Predicted'])
+    # df_cm = pd.concat([y_test, df1], axis=1)
+    # print(df_cm)
         
-    df_cm.to_csv('cm.csv', index = False)
+    # df_cm.to_csv('cm.csv', index = False)
 
-    roc_auc = roc_auc_score(y_test, model.predict_proba(x_test)[:, 1])
-    print('ROC_AUC:{0:0.2f}'.format(roc_auc))
+    # roc_auc = roc_auc_score(y_test, model.predict_proba(x_test)[:, 1])
+    # print('ROC_AUC:{0:0.2f}'.format(roc_auc))
 
     Logistic_Accuracy = accuracy_score(y_test, predicted_val)
     print('Logistic Regression Model Accuracy:{0:0.2f}'.format(Logistic_Accuracy))
@@ -109,10 +109,10 @@ def train_and_evaluate(config_path):
         scores = {
             "train_score": train_score,
             "test_score": test_score,
-            "roc_auc": roc_auc,
+ #           "roc_auc": roc_auc,
             "Logistic Accuracy": Logistic_Accuracy      
         }
-        json.dump(scores, f, indent=4)
+        json.dump(scores, f, indent=3)
 
 
     os.makedirs(model_dir, exist_ok=True)

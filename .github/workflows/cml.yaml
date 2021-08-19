@@ -1,4 +1,4 @@
-name: train-my-model
+name: dvc_model
 on: [push]
 jobs:
   run:
@@ -10,9 +10,5 @@ jobs:
           env:
               REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           run: |
-              pip install -r requirements.txt
-              python train.py
-
-              cat metrics.txt >> report.md
-              cml-publish confusion_matrix.png --md >> report.md
-              cml-send-comment report.md
+              dvc repro
+              dvc metrics show

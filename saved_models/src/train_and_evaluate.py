@@ -40,7 +40,7 @@ def train_and_evaluate(config_path):
     y_test = y_test.to_numpy()
     
     from sklearn.linear_model import LogisticRegression
-    model = LogisticRegression(solver='ovr', random_state=0).fit(x_train, y_train.ravel())
+    model = LogisticRegression(solver='sag', random_state=0).fit(x_train, y_train.ravel())
 
     train_score = model.score(x_train, y_train) * 100
     print(train_score)

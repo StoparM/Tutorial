@@ -15,6 +15,4 @@ jobs:
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-              dvc repro
-              dvc metrics show
+

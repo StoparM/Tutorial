@@ -1,6 +1,6 @@
 stages:
-  load_data:
-    cmd: python ./saved_models/src/load_data.py --config=params.yaml
+  get_data:
+    cmd: python ./saved_models/src/get_data.py --config=params.yaml
     deps:
     - ./saved_models/src/get_data.py
     - ./saved_models/src/load_data.py

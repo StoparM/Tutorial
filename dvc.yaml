@@ -1,12 +1,4 @@
 stages:
-  get_data:
-    cmd: python ./saved_models/src/get_data.py --config=params.yaml
-    deps:
-    - ./saved_models/src/get_data.py
-    - ./data_given/data_file_lab.csv
-    outs:
-    - ./data/processed/data.csv
-
   load_data:
     cmd: python ./saved_models/src/load_data.py --config=params.yaml
     deps:

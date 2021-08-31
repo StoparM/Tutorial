@@ -1,65 +1,65 @@
 schema: '2.0'
 stages:
   load_data:
-    cmd: python C:\dvc_tutorial\saved_models\src\load_data.py --config=params.yaml
+    cmd: python ./saved_models/src/load_data.py --config=params.yaml
     deps:
-    - path: data_given\data_file_lab.csv
-      md5: ca06639c9b93aa1f18356cc57c092d4e
-      size: 18191127
-    - path: saved_models\src\get_data.py
-      md5: 9c370f67c2ec8aa6472d7ddd5cca6902
+    - path: ./data_given/data_file_lab.csv
+      md5: 7a3a75bce90273926aca4e25192eaf7a
+      size: 18294546
+    - path: ./saved_models/src/get_data.py
+      md5: 8be524c003abea44b3b048ac01470b7e
       size: 793
-    - path: saved_models\src\load_data.py
-      md5: 5002ba2233af5a674fcda820e2673830
-      size: 519
+    - path: ./saved_models/src/load_data.py
+      md5: f24f265a371248a9e24f07ef8ddb9153
+      size: 504
     outs:
-    - path: data\raw\data_file_lab.csv
-      md5: ca06639c9b93aa1f18356cc57c092d4e
-      size: 18191127
+    - path: ./data/raw/data_file_lab.csv
+      md5: d9605d704cfadd8e0cf38db91087ed59
+      size: 18195362
   split_data:
-    cmd: python C:\dvc_tutorial\saved_models\src\split_data.py --config=params.yaml
+    cmd: python ./saved_models/src/split_data.py --config=params.yaml
     deps:
-    - path: data\raw\data_file_lab.csv
-      md5: ca06639c9b93aa1f18356cc57c092d4e
-      size: 18191127
-    - path: saved_models\src\split_data.py
+    - path: ./data/raw/data_file_lab.csv
+      md5: d9605d704cfadd8e0cf38db91087ed59
+      size: 18195362
+    - path: ./saved_models/src/split_data.py
       md5: 3b7e2cd5cc4f3a98fefba67d61560e86
       size: 1490
     outs:
-    - path: data\processed\x_test.csv
+    - path: ./data/processed/x_test.csv
       md5: 4116be92f1ab73dc47dda87ab55b2b24
       size: 6295464
-    - path: data\processed\x_train.csv
+    - path: ./data/processed/x_train.csv
       md5: 16c9a4625cdb66f3c452126ca99d1cd0
       size: 11878927
-    - path: data\processed\y_test.csv
-      md5: 9aa7df445870177fe08ae03881dd08ae
+    - path: ./data/processed/y_test.csv
+      md5: 5be237aa1244c921d8b06c0f1748a6d8
       size: 8787
-    - path: data\processed\y_train.csv
-      md5: 11f7f59943cc839e6bd813f073b70b2c
+    - path: ./data/processed/y_train.csv
+      md5: 0bc79fd1962b7f7d95fd9ed38bd3b92e
       size: 16317
   train_and_evaluate:
-    cmd: python  C:\dvc_tutorial\saved_models\src\train_and_evaluate.py --config=params.yaml
+    cmd: python  ./saved_models/src/train_and_evaluate.py --config=params.yaml
     deps:
-    - path: data\processed\x_test.csv
+    - path: ./data/processed/x_test.csv
       md5: 4116be92f1ab73dc47dda87ab55b2b24
       size: 6295464
-    - path: data\processed\x_train.csv
+    - path: ./data/processed/x_train.csv
       md5: 16c9a4625cdb66f3c452126ca99d1cd0
       size: 11878927
-    - path: data\processed\y_test.csv
-      md5: 9aa7df445870177fe08ae03881dd08ae
+    - path: ./data/processed/y_test.csv
+      md5: 5be237aa1244c921d8b06c0f1748a6d8
       size: 8787
-    - path: data\processed\y_train.csv
-      md5: 11f7f59943cc839e6bd813f073b70b2c
+    - path: ./data/processed/y_train.csv
+      md5: 0bc79fd1962b7f7d95fd9ed38bd3b92e
       size: 16317
-    - path: saved_models\src\train_and_evaluate.py
-      md5: 301219fa10f242b6d3efcf765c423924
-      size: 4464
+    - path: ./saved_models/src/train_and_evaluate.py
+      md5: b82cae651b4295d0112cfd090f2ab1f3
+      size: 4893
     outs:
+    - path: ./saved_models/model.joblib
+      md5: 06e40f8bc62bfc0cab1e4039c6d99ec1
+      size: 12845
     - path: report/scores.json
-      md5: b689637f990bfa6a0c4ad73ce294e031
-      size: 123
-    - path: saved_models\model.joblib
-      md5: bfb4bde756ecedd27959666b9794539c
-      size: 3183
+      md5: b506a65ead92640ecc488bba0dd2f19a
+      size: 48

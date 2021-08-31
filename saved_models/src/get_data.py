@@ -15,9 +15,9 @@ def get_data(config_path):
     df = pd.read_csv(data_path, header=None)
     df = df.replace('NiAnomalije', 0)
     df = df.replace('InstaD', 1)
-    df = df.replace('SlowD', 1)
-    df = df.replace('SuddenR', 1)
-    df = df.replace('SuddenD', 1)
+    df = df.replace('SlowD', 2)
+    df = df.replace('SuddenR', 3)
+    df = df.replace('SuddenD', 4)
 
     print(df)
 

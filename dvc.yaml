@@ -1,33 +1,33 @@
 stages:
   load_data:
-    cmd: python C:\dvc_tutorial\saved_models\src\load_data.py --config=params.yaml
+    cmd: python ./saved_models/src/load_data.py --config=params.yaml
     deps:
-    - C:\dvc_tutorial\saved_models\src\get_data.py
-    - C:\dvc_tutorial\saved_models\src\load_data.py
-    - C:\dvc_tutorial\data_given\data_file_lab.csv
+    - ./saved_models/src/get_data.py
+    - ./saved_models/src/load_data.py
+    - ./data_given/data_file_lab.csv
     outs:
-    - C:\dvc_tutorial\data\raw\data_file_lab.csv
+    - ./data/raw/data_file_lab.csv
 
   split_data:
-    cmd: python C:\dvc_tutorial\saved_models\src\split_data.py --config=params.yaml
+    cmd: python ./saved_models/src/split_data.py --config=params.yaml
     deps:
-    - C:\dvc_tutorial\saved_models\src\split_data.py
-    - C:\dvc_tutorial\data\raw\data_file_lab.csv
+    - ./saved_models/src/split_data.py
+    - ./data/raw/data_file_lab.csv
     outs:
-    - C:\dvc_tutorial\data\processed\x_train.csv
-    - C:\dvc_tutorial\data\processed\y_train.csv
-    - C:\dvc_tutorial\data\processed\x_test.csv 
-    - C:\dvc_tutorial\data\processed\y_test.csv
+    - ./data/processed/x_train.csv
+    - ./data/processed/y_train.csv
+    - ./data/processed/x_test.csv 
+    - ./data/processed/y_test.csv
 #, dvc plots show
   train_and_evaluate:
-    cmd: python  C:\dvc_tutorial\saved_models\src\train_and_evaluate.py --config=params.yaml 
+    cmd: python  ./saved_models/src/train_and_evaluate.py --config=params.yaml 
     
     deps:
-    - C:\dvc_tutorial\data\processed\x_train.csv
-    - C:\dvc_tutorial\data\processed\y_train.csv
-    - C:\dvc_tutorial\data\processed\x_test.csv 
-    - C:\dvc_tutorial\data\processed\y_test.csv
-    - C:\dvc_tutorial\saved_models\src\train_and_evaluate.py
+    - ./data/processed/x_train.csv
+    - ./data/processed/y_train.csv
+    - ./data/processed/x_test.csv 
+    - ./data/processed/y_test.csv
+    - ./saved_models/src/train_and_evaluate.py
     
     metrics:
     - report/scores.json:
@@ -48,4 +48,4 @@ stages:
         
 
     outs:
-    - C:\dvc_tutorial\saved_models\model.joblib
+    - ./saved_models/model.joblib

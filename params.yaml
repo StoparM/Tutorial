@@ -4,22 +4,22 @@ base:
   target_col: chd
 
 data_source:
-  s3_source: C:\dvc_tutorial\data_given\data_file_lab.csv
+  s3_source: ./data_given/data_file_lab.csv
 
 load_data:
-  raw_dataset_csv: C:\dvc_tutorial\data\raw\data_file_lab.csv
+  raw_dataset_csv: ./data/raw/data_file_lab.csv
 
 split_data:
-  x_train_path: C:\dvc_tutorial\data\processed\x_train.csv
-  y_train_path: C:\dvc_tutorial\data\processed\y_train.csv
-  x_test_path: C:\dvc_tutorial\data\processed\x_test.csv
-  y_test_path: C:\dvc_tutorial\data\processed\y_test.csv
-  test_size: 0.35
+  x_train_path: ./data/processed/x_train.csv
+  y_train_path: ./data/processed/y_train.csv
+  x_test_path: ./data/processed/x_test.csv
+  y_test_path: ./data/processed/y_test.csv
+  test_size: 0.2
   
 model_dir: saved_models
 
 reports:
   scores: report/scores.json
-  roc: report/roc.json
-  prc: report/prc.json
-  auc: report/auc.json
+  # roc: report/roc.json
+  # prc: report/prc.json
+  # auc: report/auc.json

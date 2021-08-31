@@ -8,7 +8,8 @@ import sklearn.metrics as metrics
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, plot_roc_curve,accuracy_score
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.metrics import average_precision_score
 from numpyencoder import NumpyEncoder
 from get_data import read_params
@@ -19,6 +20,52 @@ import json
 from sklearn.metrics import plot_confusion_matrix
 
 #https://www.analyticsvidhya.com/blog/2021/06/mlops-tracking-ml-experiments-with-data-version-control/
+
+def plot_confusion_matrix(cm,
+                          target_names,
+                          title='Confusion matrix',
+                          cmap=None,
+                          normalize=True):
+    import itertools
+
+    accuracy = np.trace(cm) / float(np.sum(cm))
+    misclass = 1 - accuracy
+
+    if cmap is None:
+        cmap = plt.get_cmap('Blues')
+
+    plt.figure(figsize=(8, 6))
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+
+    if target_names is not None:
+        tick_marks = np.arange(len(target_names))
+        plt.xticks(tick_marks, target_names, rotation=45)
+        plt.yticks(tick_marks, target_names)
+
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+
+    thresh = cm.max() / 1.5 if normalize else cm.max() / 2
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        if normalize:
+            plt.text(j, i, "{:0.4f}".format(cm[i, j]),
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+        else:
+            plt.text(j, i, "{:,}".format(cm[i, j]),
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label\naccuracy={:0.4f}; misclass={:0.4f}'.format(accuracy, misclass))
+    plt.show()
+
+
 
 def train_and_evaluate(config_path):
 
@@ -41,15 +88,22 @@ def train_and_evaluate(config_path):
     y_test = y_test.to_numpy()
     
     from sklearn.linear_model import LogisticRegression
-    model = LogisticRegression(solver='sag', random_state=0).fit(x_train, y_train.ravel())
+    model = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 0).fit(x_train, y_train.ravel())
+    # DecisionTreeClassifier(criterion = 'entropy', random_state = 0)
 
 
-    disp = plot_confusion_matrix(model, x_test, y_test, normalize='true',cmap=plt.cm.Blues)
+    predicted_val = model.predict(x_test)
+
+    anomalies = ('NiAnomalije', 'InstaD', 'SlowD', 'SuddenR', 'SuddenD', )
+    cm = confusion_matrix(y_test, predicted_val, normalize='true')
+    disp = plot_confusion_matrix(cm, target_names=anomalies)
     plt.savefig('confusion_matrix.png')
 
-    train_score = model.score(x_train, y_train) * 100
-    test_score = model.score(x_test, y_test) * 100
-    predicted_val = model.predict(x_test)
+    # disp = plot_confusion_matrix(model, x_test, y_test, normalize='true',cmap=plt.cm.Blues)
+    # plt.savefig('confusion_matrix.png')
+
+    # train_score = model.score(x_train, y_train) * 100
+    # test_score = model.score(x_test, y_test) * 100
 
     scores_file = config["reports"]["scores"]
 
@@ -60,7 +114,7 @@ def train_and_evaluate(config_path):
         scores = {
             "Accuracy": Logistic_Accuracy      
         }
-        json.dump(scores, f, indent=3)
+        json.dump(scores, f)
 
 
     os.makedirs(model_dir, exist_ok=True)

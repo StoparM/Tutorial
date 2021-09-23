@@ -27,39 +27,39 @@ stages:
       size: 1490
     outs:
     - path: ./data/processed/x_test.csv
-      md5: 4116be92f1ab73dc47dda87ab55b2b24
-      size: 6295464
+      md5: 64a99881026c885cc24d3a6830f9b397
+      size: 3580065
     - path: ./data/processed/x_train.csv
-      md5: 16c9a4625cdb66f3c452126ca99d1cd0
-      size: 11878927
+      md5: 94af371da524383f746320946f60ac0a
+      size: 14594326
     - path: ./data/processed/y_test.csv
-      md5: 5be237aa1244c921d8b06c0f1748a6d8
-      size: 8787
+      md5: 398f2b9d16804be7dab67ad7a80c5504
+      size: 5022
     - path: ./data/processed/y_train.csv
-      md5: 0bc79fd1962b7f7d95fd9ed38bd3b92e
-      size: 16317
+      md5: 45c94bd1509c0ab76af48f8785fa06a1
+      size: 20082
   train_and_evaluate:
     cmd: python  ./saved_models/src/train_and_evaluate.py --config=params.yaml
     deps:
     - path: ./data/processed/x_test.csv
-      md5: 4116be92f1ab73dc47dda87ab55b2b24
-      size: 6295464
+      md5: 64a99881026c885cc24d3a6830f9b397
+      size: 3580065
     - path: ./data/processed/x_train.csv
-      md5: 16c9a4625cdb66f3c452126ca99d1cd0
-      size: 11878927
+      md5: 94af371da524383f746320946f60ac0a
+      size: 14594326
     - path: ./data/processed/y_test.csv
-      md5: 5be237aa1244c921d8b06c0f1748a6d8
-      size: 8787
+      md5: 398f2b9d16804be7dab67ad7a80c5504
+      size: 5022
     - path: ./data/processed/y_train.csv
-      md5: 0bc79fd1962b7f7d95fd9ed38bd3b92e
-      size: 16317
+      md5: 45c94bd1509c0ab76af48f8785fa06a1
+      size: 20082
     - path: ./saved_models/src/train_and_evaluate.py
-      md5: f6478677bc890eff11ddce28dadc97dc
-      size: 4530
+      md5: e0aecf93998e315093acf99ff404c32d
+      size: 4532
     outs:
     - path: ./saved_models/model.joblib
-      md5: 8e644a0272e8808f6a356c323cebe4e3
-      size: 598729
+      md5: b441d4b5cb4a7c6146336b8faaf42ec2
+      size: 648457
     - path: report/scores.json
-      md5: ac17b1352388c412fb7abec82488996d
+      md5: 662b7469413906e4740dc483ef0f9887
       size: 32

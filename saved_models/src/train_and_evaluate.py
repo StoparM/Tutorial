@@ -19,8 +19,6 @@ import joblib
 import json
 from sklearn.metrics import plot_confusion_matrix
 
-#https://www.analyticsvidhya.com/blog/2021/06/mlops-tracking-ml-experiments-with-data-version-control/
-
 def plot_confusion_matrix(cm,
                           target_names,
                           title='Confusion matrix',
@@ -89,7 +87,11 @@ def train_and_evaluate(config_path):
     
     from sklearn.linear_model import LogisticRegression
     model = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 0).fit(x_train, y_train.ravel())
-    # DecisionTreeClassifier(criterion = 'entropy', random_state = 0)
+    
+    # DecisionTreeClassifier(criterion = 'entropy', random_state = 999)
+    # LogisticRegression()
+    # GaussianNB()
+    # RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 999)
 
 
     predicted_val = model.predict(x_test)
@@ -99,11 +101,6 @@ def train_and_evaluate(config_path):
     disp = plot_confusion_matrix(cm, target_names=anomalies)
     plt.savefig('confusion_matrix.png')
 
-    # disp = plot_confusion_matrix(model, x_test, y_test, normalize='true',cmap=plt.cm.Blues)
-    # plt.savefig('confusion_matrix.png')
-
-    # train_score = model.score(x_train, y_train) * 100
-    # test_score = model.score(x_test, y_test) * 100
 
     scores_file = config["reports"]["scores"]
 

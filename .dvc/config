@@ -1,4 +1,6 @@
 [core]
-    remote = remote_storage
+    remote = storage
 ['remote "remote_storage"']
     url = C:/dvc_remote_storage
+['remote "storage"']
+    url = C:/tutorial/storage

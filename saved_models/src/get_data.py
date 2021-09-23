@@ -19,8 +19,6 @@ def get_data(config_path):
     df = df.replace('SuddenR', 3)
     df = df.replace('SuddenD', 4)
 
-    print(df)
-
     return df
 
 if __name__=="__main__":

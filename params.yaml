@@ -4,7 +4,7 @@ base:
   target_col: chd
 
 data_source:
-  s3_source: ./data_given/data_file_lab.csv
+  source: ./data_given/data_file_lab.csv
 
 load_data:
   raw_dataset_csv: ./data/raw/data_file_lab.csv

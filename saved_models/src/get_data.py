@@ -10,7 +10,7 @@ def read_params(config_path):
 
 def get_data(config_path):
     config = read_params(config_path)
-    data_path = config["data_source"]["s3_source"]
+    data_path = config["data_source"]["source"]
 
     df = pd.read_csv(data_path, header=None)
     df = df.replace('NiAnomalije', 0)

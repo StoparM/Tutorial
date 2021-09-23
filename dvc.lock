@@ -7,8 +7,8 @@ stages:
       md5: 7a3a75bce90273926aca4e25192eaf7a
       size: 18294546
     - path: ./saved_models/src/get_data.py
-      md5: 8be524c003abea44b3b048ac01470b7e
-      size: 793
+      md5: b8b800a9a5065a14b3e1b94acfd98a1d
+      size: 773
     - path: ./saved_models/src/load_data.py
       md5: f24f265a371248a9e24f07ef8ddb9153
       size: 504
@@ -54,8 +54,8 @@ stages:
       md5: 45c94bd1509c0ab76af48f8785fa06a1
       size: 20082
     - path: ./saved_models/src/train_and_evaluate.py
-      md5: e0aecf93998e315093acf99ff404c32d
-      size: 4532
+      md5: 611430325dff796744d80f734125319d
+      size: 4321
     outs:
     - path: ./saved_models/model.joblib
       md5: b441d4b5cb4a7c6146336b8faaf42ec2

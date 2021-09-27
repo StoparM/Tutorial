@@ -86,7 +86,7 @@ def train_and_evaluate(config_path):
     y_test = y_test.to_numpy()
     
     from sklearn.linear_model import LogisticRegression
-    model = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 0).fit(x_train, y_train.ravel())
+    model = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 999).fit(x_train, y_train.ravel())
     
     # DecisionTreeClassifier(criterion = 'entropy', random_state = 999)
     # LogisticRegression()
